@@ -1,0 +1,10 @@
+name:genomic_environment
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - bipython=1.78
+  - blast=2.6.0
+  - prokka=1.14.6
+  - seqtk=1.3
