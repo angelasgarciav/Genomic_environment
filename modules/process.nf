@@ -49,6 +49,7 @@ process RUN_PROKKA {
     output:
         path("${sample_id}/${sample_id}.tsv")
         path("${sample_id}/${sample_id}.txt")
+        path("${sample_id}/${sample_id}.gff")
         tuple(val(sample_id), path("${sample_id}/${sample_id}.gff"), emit: gene_annotation)
     script:
     """
@@ -58,11 +59,13 @@ process RUN_PROKKA {
 
 process GFF_TO_BED {
     tag "$sample_id"
+    publishDir params.output_dir, mode: 'copy'
 
     input:
     tuple(val(sample_id), path(annotated_genome_file))
     
     output:
+    path("${sample_id}.bed")
     tuple(val(sample_id), path("${sample_id}.bed"))
 
     script:
